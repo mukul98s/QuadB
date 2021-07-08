@@ -1,38 +1,466 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+  --primary-text: #3bbfb2;
+  --background: #191c29;
+  --danger: #d95959;
+  --light-background: #2f3240;
+  --light-text: #fff;
+  --gray-text: gray;
+  --table-font: 24px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background: var(--background);
+  font-family: "Oswald";
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Header Component */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin: 1rem; */
+  padding: 20px 30px 0;
+}
+
+.header__image {
   display: flex;
   flex-direction: column;
+  padding: 0.5rem 1rem;
+}
+
+.header__image img {
+  width: 60%;
+  padding: 5px;
+}
+
+.header__title p {
+  color: gray;
+  font-size: 18px;
+  margin-top: -18px;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.header__title p a {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+.header__currency {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header__currency .currency,
+.header__currency .crypto,
+.header__currency .buy {
+  background-color: var(--light-background);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header__currency .buy {
+  padding: 6px 20px;
+}
+
+.header__currency .buy h3 {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--light-text);
+}
+
+.header__currency .currency select,
+.header__currency .crypto select {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--light-text);
+  padding: 6px 20px;
+  cursor: pointer;
+  font-family: "Oswald";
+  font-weight: 400;
+  font-size: 16px;
+}
+
+option {
+  color: var(--light-background);
+  padding: 0.25rem 1.5rem;
+}
+
+.header__toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__toggle .button button {
+  background: var(--primary-text);
+  border: none;
+  padding: 6px 20px;
+  border-radius: 10px;
+  text-transform: capitalize;
+  font-family: "oswald";
+  font-size: 1rem;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header__toggle .button button svg {
+  margin-right: 6px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--light-background);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--primary-text);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--light-background);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--light-background);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.loader__timer {
+  font-size: 14px;
+  color: var(--primary-text);
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: var(--primary-text) !important;
+}
+.MuiCircularProgress-root {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+/* Price Component */
+.primary__text {
+  color: var(--primary-text);
+  font-size: 40px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.secondary__text {
+  color: var(--gray-text);
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.middle .secondary__text:nth-child(1) {
+  font-size: 30px;
+  font-weight: 300;
+}
+.main__text {
+  color: var(--light-text);
+  font-size: 80px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.price {
+  padding: 0 30px;
+  margin: 20px auto;
+}
+.price__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 40% 1fr 1fr;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.price__banner img {
+  width: 100%;
+  margin-top: 30px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Platform Component */
+.platform {
+  padding: 0 30px;
+}
+.platform table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1em;
+  margin: 0;
+  color: var(--gray-text);
+}
+.platform tabel thead th {
+  color: var(--light-text);
+  padding: 0 12px;
+}
+.platform th h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Oswald;
+  font-size: var(--table-font);
+  letter-spacing: 1px;
+  margin: 0 0 -5px;
+  font-weight: 500;
+}
+.platform table tbody td {
+  text-align: center;
+  color: var(--light-text);
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.platform table tbody tr {
+  background: var(--light-background);
+  border-radius: 10px;
+  padding: 10px;
+}
+.platform table tbody tr a {
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+tbody td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+tbody td:last-child {
+  border-radius: 0px 10px 10px 0px;
+}
+.platform table tbody td h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Oswald;
+  font-size: var(--table-font);
+  letter-spacing: 1px;
+  margin: 0 0 -5px;
+  color: var(--light-text);
+  font-weight: 500;
+  padding: 0 0.75rem;
+}
+.platform table tbody td h4 svg {
+  margin-right: 5px;
+  font-size: 36px;
+}
+.exchange-logo {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+}
+.danger {
+  color: #da5757 !important;
+}
+.positive {
+  color: var(--primary-text) !important;
+}
+
+.platform__banner {
+  padding: 0 30px;
+  margin: 20px 0;
+}
+.platform__banner img {
+  width: 100%;
+  cursor: pointer;
+}
+/* Footer Component */
+footer {
+  border-top: 2px solid var(--light-background);
+  padding-bottom: 10px;
+}
+
+footer .footer__copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 12px 0;
+  margin-bottom: 50px;
+}
+
+footer .left__copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.left__copyright a {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+.left__copyright h4,
+.right__copyright h4 {
+  color: var(--gray-text);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+footer .footer__fixed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 4px;
+  background: #2f3240;
+}
+footer .footer__fixed button {
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid var(--primary-text);
+  color: var(--primary-text);
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+footer .footer__fixed button:hover {
+  background: var(--primary-text);
+  color: var(--light-text);
+}
+
+/* Responsiveness */
+@media screen and (max-width: 840px) {
+  .header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  .header__image {
+    justify-content: center;
+    align-items: center;
+  }
+  .header__image a,
+  .header__title {
+    text-align: center;
+  }
+  .header__image img {
+    width: 85%;
+  }
+
+  .header__currency {
+    gap: 1rem;
+  }
+  .header__currency .currency select,
+  .header__currency .crypto select,
+  .header__currency .buy {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+  .buy h3 {
+    font-size: 0.8rem !important;
+  }
+
+  .header__toggle {
+    transform: scale(0.9);
+  }
+
+  .primary__text {
+    font-size: 14px;
+  }
+  .secondary__text {
+    font-size: 10px;
+  }
+  .main__text {
+    font-size: 20px;
+  }
+
+  .middle .secondary__text:nth-child(1) {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .middle .secondary__text:nth-child(2) {
+    font-size: 8px;
+  }
+  .middle .main__text {
+    margin: 10px 0;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .platform {
+    padding: 0 10px;
+  }
+  .platform th h4 {
+    font-size: 10px;
+  }
+  .platform table tbody td {
+    padding: 6px 3px !important;
+    white-space: nowrap;
   }
 }
